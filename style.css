@@ -1,0 +1,42 @@
+body {
+  margin: 0 auto;
+  background-color: darkgrey;
+}
+.container {
+  width: 95%;
+  background-color: grey;
+  margin: auto;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navi {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+}
+li {
+  display: flex;
+  display: inline-flex;
+  justify-content: space-around;
+  margin-left: 5px;
+  padding: 5px;
+  font-size: large;
+  font-weight: bolder;
+  border: 2px solid;
+}
+
+.contact-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card {
+  border: 2px solid black;
+  width: 10vw;
+  justify-items: center;
+  align-items: center;
+}
