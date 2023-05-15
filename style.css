@@ -12,6 +12,10 @@ body {
   justify-content: space-between;
 }
 
+#btn-saveEdit {
+  display: none;
+}
+
 .navi {
   display: flex;
   justify-content: space-around;
