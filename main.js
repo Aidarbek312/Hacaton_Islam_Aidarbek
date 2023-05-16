@@ -1,34 +1,31 @@
 const API = "http://localhost:8000/contact";
-
 let name = document.querySelector("#inp-name");
-let surname = document.querySelector("#inp-Surname");
 let photo = document.querySelector("#inp-Photo");
-let number = document.querySelector("#inp-Number");
-let email = document.querySelector("#inp-Email");
+let name2 = document.querySelector("#inp-name2");
+let photo2 = document.querySelector("#inp-Photo2");
 let btnAdd = document.querySelector("#btn-add");
 let btnSaveEdit = document.querySelector("#btn-saveEdit");
 let contactCard = document.querySelector(".contact-card");
 let searhInp = document.querySelector(".innSearch");
+let btnAddModal = document.querySelector(".btn-add-modal");
+let mainModal = document.querySelector(".main-modal");
+let btnClose = document.querySelector(".btn-closer");
+let btnAddinmodal = document.querySelector("#btn-addmodal");
+let btnPub = document.querySelector("#btnPublick");
+let pulicks = document.querySelector("#subscribers1");
+let subscribers1 = document.getElementById("subscribers1");
 
-let editId = 0;
+let searhVal = ""; // глобальная видимость для поиска
+let editId = 2; // глобальная видимость для добавления ID
 
 // ! Добавление карточки контакта =========== старт ===========
 btnAdd.addEventListener("click", async function () {
   // собираем обьект для добавления в db.json
   let obj = {
     name: name.value,
-    surname: surname.value,
     photo: photo.value,
-    number: number.value,
-    email: email.value,
   };
-  if (
-    !obj.name.trim() ||
-    !obj.surname.trim() ||
-    !obj.photo.trim() ||
-    !obj.number.trim() ||
-    !obj.email.trim()
-  ) {
+  if (!obj.name.trim() || !obj.photo.trim()) {
     alert("Заполните все поля");
     return;
   }
@@ -42,11 +39,7 @@ btnAdd.addEventListener("click", async function () {
   });
   //   Очищаем инпуты
   name.value = "";
-  surname.value = "";
   photo.value = "";
-  number.value = "";
-  email.value = "";
-
   render(); //   отрисовка - рендер обнавленного db.json
 });
 // ! Добавление карточки контакта =========== конец ===========
@@ -56,29 +49,40 @@ async function render() {
   let contact = await fetch(`${API}?q=${searhVal}`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
-
   contactCard.innerHTML = "";
-
   contact.forEach((element) => {
     // console.log(element);
     let newElem = document.createElement("div");
     newElem.innerHTML = `
-    <div class="card">
-    <img src="${element.photo}" alt="" style="width:100%">
-    <div class="card-body">
-    <p>${element.name}</p>
-    <p>${element.surname}</p>
-    <p>${element.number}</p>
-    <p>${element.email}</p></div>
-    <button class="btn-del" onclick="deleter(${element.id})">DEL</button>
-    <button onclick="editer(${element.id})" >EDIT</button>
+    <div class="card" onmouseover="showbutton(${element.id})" onmouseout="hidebutton(${element.id})">
+      <div class="photo">
+        <button class="btn-del" onclick="deleter(${element.id})" id="btn-del${element.id}">X</button>
+          <img
+          src="${element.photo}"
+          class="img-card"
+          style="width: 100%"
+          alt="Картинка)"
+          />
+      </div>
+          <div class="card-body">
+            <p>Name: ${element.name}</p>
+          </div>
+        </div>
+      </div>
     </div>
     `;
     contactCard.append(newElem);
+
+    let pubss = fetch(API)
+      .then((res) => res.json())
+      .then((data) => {
+        let pulicks2 = data.length;
+        subscribers1.innerText = pulicks2;
+        console.log(data.length);
+      });
   });
 }
 render();
-
 // ! Функция рендер для обновления =========== конец ===========
 
 // ! Функция удаления =========== начало ===========
@@ -90,71 +94,22 @@ async function deleter(id) {
 }
 // ! Функция удаления =========== конец ===========
 
-// ! Функция изменения =========== начало ===========
-async function editer(id) {
-  editId = id;
-  let data = await fetch(`${API}/${id}`).then((res) => res.json());
-  console.log(data);
-  btnSaveEdit.style.display = "block";
-  btnAdd.style.display = "none";
-
-  if (data?.name) {
-    name.value = data.name;
-    surname.value = data.surname;
-    photo.value = data.photo;
-    number.value = data.number;
-    email.value = data.email;
-  }
-
-  render();
+// ! Modal adder start =====================
+function publication() {
+  mainModal.style.display = "block";
 }
-
-btnSaveEdit.addEventListener("click", () => {
-  let obj = {
-    name: name.value,
-    surname: surname.value,
-    photo: photo.value,
-    number: number.value,
-    email: email.value,
-  };
-  if (
-    !obj.name.trim() ||
-    !obj.surname.trim() ||
-    !obj.photo.trim() ||
-    !obj.number.trim() ||
-    !obj.email.trim()
-  ) {
-    alert("Заполните все поля");
-    return;
-  }
-
-  //запрос на изменение контакта
-
-  fetch(`${API}/${editId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify(obj),
-  }).then(() => {
-    render();
-    //   Очищаем инпуты
-    name.value = "";
-    surname.value = "";
-    photo.value = "";
-    number.value = "";
-    email.value = "";
-
-    btnAdd.style.display = "block";
-    btnSaveEdit.style.display = "none";
-
-    editId = 0;
-  });
-});
-// ! Функция изменения =========== конец ===========
-
-searhInp.addEventListener("input", (e) => {
-  searhVal = e.target.value;
-  searhVal.value = "";
-  render();
-});
+function publicationX() {
+  mainModal.style.display = "none";
+}
+function showbutton(id) {
+  document.querySelector("#btn-del" + id).style.display = "block";
+}
+function hidebutton(id) {
+  document.querySelector("#btn-del" + id).style.display = "none";
+}
+// ! Modal adder end =====================
+function subscribe() {
+  let subscribers = document.getElementById("subscribers");
+  let count = parseInt(subscribers.innerText);
+  subscribers.innerText = count + 1;
+}

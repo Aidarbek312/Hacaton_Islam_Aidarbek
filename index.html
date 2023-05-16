@@ -4,35 +4,172 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Instagram</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@100;200;300;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./icons/icons8-instagram.svg" />
   </head>
   <body>
-    <div class="container">
-      <!-- navbar start -->
-      <div class="navbar">
-        <ul class="navi">
-          <li>CONTACTBOOK</li>
-          <li>MENU</li>
-          <li>ABOUT OURS</li>
-          <li>ДОБАВЛЕНИЕ ЧЕРЕЗ MODAL</li>
-        </ul>
-        <input type="text" class="innSearch" placeholder="search" />
-      </div>
-      <!-- navbar end -->
-      <div class="adder">
-        <p><input type="text" id="inp-name" placeholder="name" /></p>
-        <p><input type="text" id="inp-Surname" placeholder="surmane" /></p>
-        <p><input type="text" id="inp-Photo" placeholder="url photo" /></p>
-        <p><input type="text" id="inp-Number" placeholder="number" /></p>
-        <p><input type="text" id="inp-Email" placeholder="email" /></p>
-        <button id="btn-add">ADD</button>
-        <button id="btn-saveEdit">Save</button>
-      </div>
-      <!-- contact-card start -->
-      <div class="contact-card"></div>
-      <!-- contact-card start -->
+    <div class="staticBar">
+      <ul class="staticUL">
+        <li class="staticLi">
+          <img
+            src="./icons/free-icon-font-user-add-3917709.svg"
+            id="userAdd"
+            alt=""
+          />
+        </li>
+        <li class="staticLi"><h3>DonaldTrump</h3></li>
+        <li class="staticLi">
+          <img
+            src="./icons/free-icon-font-time-past-3917296.svg"
+            id="timePast"
+            alt=""
+          />
+        </li>
+      </ul>
     </div>
+    <div class="container">
+      <!-- status bar start -->
+      <div class="statusBar">
+        <div class="photobar">
+          <img
+            onmouseover="showbutton()"
+            src="./icons/photo1684213150.jpeg"
+            id="donald"
+            alt=""
+          />
+        </div>
+        <div class="infobar">
+          <div class="followerBar">
+            <h4><span id="subscribers1">3</span> публикации</h4>
+            <h4><span id="subscribers">100000</span> подписчики</h4>
+            <h4><span id="subscribers">254</span> подписки</h4>
+          </div>
+          <div class="buttonBar">
+            <button class="button" onclick="subscribe()">Подписаться</button
+            ><button class="button2">Редактировать профиль</button
+            ><button class="button3">
+              <img
+                src="./icons/free-icon-font-settings-3917035.svg"
+                id="settings"
+                alt=""
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- status bar end -->
+
+      <!--AboutME start  -->
+      <div class="aboutme">
+        <p>Donald John Trump</p>
+        <p>Official Page</p>
+        <p>President of USA</p>
+        <p>Repulican part</p>
+        <p><a href="">loc. New York, USA</a></p>
+      </div>
+      <!--AboutME end  -->
+
+      <!-- buttons MAIN start -->
+      <div class="buttonsMain">
+        <button class="btnMain">Позвонить</button
+        ><button class="btnMain">Эл. письмо</button
+        ><button class="btnMain">Как добраться</button>
+      </div>
+      <!-- buttons MAIN end -->
+
+      <!-- icons Main start -->
+      <div class="iconMain">
+        <img
+          class="iconsM"
+          src="./icons/free-icon-font-grid-3917024.svg"
+          alt=""
+        /><img
+          class="iconsM"
+          src="./icons/free-icon-font-list-3917040.svg"
+          alt=""
+        /><img
+          class="iconsM"
+          src="./icons/free-icon-font-clipboard-user-9856305.svg"
+          alt=""
+        /><img
+          class="iconsM"
+          src="./icons/free-icon-font-bookmark-3916803.svg"
+          alt=""
+        />
+      </div>
+      <!-- icons Main end -->
+
+      <div class="contact-card"></div>
+
+      <!-- contact-card start -->
+      <!-- ************** modalka tut ************** -->
+      <div class="main-modal">
+        <div class="inner-modal">
+          <div class="close">
+            <button class="btn-closer" onclick="publicationX()">X</button>
+          </div>
+          <!-- navbar end -->
+          <div class="adder">
+            <p><input type="text" id="inp-name" placeholder="name" /></p>
+            <p><input type="text" id="inp-Photo" placeholder="url photo" /></p>
+            <button id="btn-add">ADD</button>
+            <button id="btn-saveEdit">Save</button>
+          </div>
+          <!-- contact-card start -->
+        </div>
+      </div>
+      <!-- ************** modalka tut ************** -->
+    </div>
+    <div class="staticBar">
+      <ul class="staticUL">
+        <li>
+          <img
+            class="footerIcon"
+            src="./icons/free-icon-font-house-chimney-9245158.svg"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            class="footerIcon"
+            src="./icons/free-icon-font-search-3917754.svg"
+            alt=""
+          />
+        </li>
+        <li>
+          <button id="btnPublick" onclick="publication()">
+            <img
+              class="footerIcon"
+              src="./icons/free-icon-font-square-plus-9239975.svg"
+              alt=""
+            />
+          </button>
+        </li>
+        <li>
+          <img
+            id="public"
+            class="footerIcon"
+            src="./icons/free-icon-font-heart-3916585.svg"
+            alt=""
+            onclick="publication()"
+          />
+        </li>
+        <li>
+          <img
+            class="footerIcon"
+            src="./icons/free-icon-font-grid-3917024.svg"
+            alt=""
+          />
+        </li>
+      </ul>
+    </div>
+    <!-- ! -->
+    <!-- ! -->
     <script src="./main.js"></script>
   </body>
 </html>
