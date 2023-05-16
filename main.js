@@ -21,6 +21,7 @@ let editId = 2; // глобальная видимость для добавле
 // ! Добавление карточки контакта =========== старт ===========
 btnAdd.addEventListener("click", async function () {
   // собираем обьект для добавления в db.json
+  //
   let obj = {
     name: name.value,
     photo: photo.value,
